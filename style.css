@@ -1,0 +1,457 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700&display=swap');
+
+:root {
+
+  --clr-neutral-150: hsl(0, 0%, 98%);
+  --clr-neutral-300: hsl(0, 0%, 41%);
+  --clr-neutral-800: hsl(0, 0%, 8%);
+
+  --ff-body: 'Epilogue', sans-serif;
+
+  --fw-500: 500;
+  --fw-700: 700;
+
+}
+
+
+/* ------------------ CSS Reset -------------------------------- */
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+body,
+html {
+  min-height: 100%;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------- General Styling ---------------------------- */
+body {
+  font-size: 18px;
+  font-family: var(--ff-body);
+}
+
+.logo {
+  margin: 8px 0px;
+}
+
+.button {
+  padding: 1rem 30%;
+  border: 2px solid var(--clr-neutral-300);
+  border-radius: 1rem;
+  line-height: 1;
+  width: fit-content;
+  margin: 6px auto;
+  color: var(--clr-neutral-300);
+  font-weight: var(--fw-500);
+  font-family: var(--ff-body);
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.button:is(:hover, :focus-visible) {
+  border: 2px solid var(--clr-neutral-800);
+  color: var(--clr-neutral-800);
+}
+
+.button[data-type="no-border"] {
+  border: 0;
+  padding: 1rem 2rem;
+}
+
+.button[data-type="invert"] {
+  display: block;
+  margin-inline: auto;
+  width: fit-content;
+  padding: 1rem 2rem;
+  color: white;
+  background-color: var(--clr-neutral-800);
+  margin-bottom: 3rem;
+  font-weight: var(--fw-700);
+}
+
+.button[data-type="invert"]:is(:hover, :focus-visible) {
+  background-color: var(--clr-neutral-150);
+  color: var(--clr-neutral-800);
+}
+
+@media (min-width:47em) {
+  .button {
+    padding: 1rem 1rem;
+  }
+}
+
+/* ------------------------ Navbar ---------------------------------- */
+
+.primary-header {
+  padding: 1rem 2rem;
+}
+
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.primary-navigation {
+  position: fixed;
+  inset: 0 0 0 20%;
+  padding: 5rem 1rem;
+  background-color: var(--clr-neutral-150);
+  transform: translateX(100%);
+  transition: transform 0.6s ease-out;
+}
+
+.primary-navigation[data-visible="true"] {
+  box-shadow: 10px 10px 1em 100em rgba(0, 0, 0, 0.4);
+  transform: translateX(0%);
+}
+
+.main-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.primary-navigation a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 10px 15px;
+  color: var(--clr-neutral-300);
+  font-family: var(--ff-body);
+  font-size: 18px;
+  font-weight: var(--fw-500);
+}
+
+.primary-navigation a:is(:hover, :focus) {
+  color: black;
+}
+
+.arrow {
+  padding-left: 6px;
+}
+
+.features-arrow-up {
+  display: none;
+}
+
+.company-arrow-up {
+  display: none;
+}
+
+
+.button-area {
+  display: flex;
+  flex-direction: column;
+}
+
+/* -- Sub-Menu------- */
+.sub-list {
+  list-style: none;
+}
+
+.sub-menu {
+  position: relative;
+  left: 2rem;
+  animation: growDown 600ms ease-in-out forwards;
+  display: none;
+}
+
+.sub-menu i {
+  padding-right: 1rem;
+}
+
+.sub-menu[data-visible="true"] {
+  display: block;
+}
+
+.mobile-nav-toggle {
+  position: fixed;
+  right: 2.4rem;
+  top: 1.2rem;
+  width: 30px;
+  aspect-ratio: 1;
+  border: 0;
+  background-image: url(images/icon-menu.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.mobile-nav-toggle[aria-expanded="true"] {
+  background-image: url(images/icon-close-menu.svg);
+}
+
+@media (min-width:47em) {
+  .nav-wrapper {
+    gap: clamp(1rem, 2vw, 3rem);
+    justify-content: center;
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+  }
+
+  .primary-navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: static;
+    padding: 0;
+    box-shadow: none;
+    transform: translateX(0%);
+    align-items: center;
+  }
+
+  .main-list {
+    display: flex;
+    list-style: none;
+    margin-left: 0rem;
+    flex-direction: row;
+    gap: clamp(2rem, 4vw, 5rem);
+  }
+
+  .primary-navigation a {
+    margin: 1px;
+  }
+
+
+  .button-area {
+    flex-direction: row;
+  }
+
+  .sub-menu {
+    background-color: var(--clr-neutral-150);
+    z-index: 1;
+    border-radius: 2rem;
+    padding: 1.4rem 1rem;
+    box-shadow: 0px 0px 8px 0.3em rgba(0, 0, 0, 0.2);
+  }
+
+  .features-tag {
+    position: relative;
+  }
+
+
+  .company-tag {
+    position: relative;
+  }
+
+  .features-list {
+    position: absolute;
+    top: 3rem;
+    left: -20px;
+    width: max-content;
+  }
+
+  .company-list {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    width: max-content;
+  }
+
+}
+
+/* ------------------------- Hero -section --------------------------- */
+
+.main-image {
+  height: 50vh;
+  background-image: url(images/image-hero-mobile.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+
+
+.main-text h1 {
+  font-size: 3rem;
+  font-weight: var(--fw-700);
+  line-height: 1;
+  text-align: center;
+}
+
+.main-text p {
+  color: var(--clr-neutral-300);
+  max-width: 36ch;
+  text-align: center;
+  margin-inline: auto;
+  font-size: 20px;
+}
+
+.main-text ul {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.main-text>* {
+  margin: 1.5rem 0;
+}
+
+@media (min-width:47em) {
+  .main-image {
+    background-image: url(images/image-hero-desktop.png);
+    grid-area: hero-img;
+    height: 100%;
+  }
+
+  .main-text {
+    grid-area: hero-text;
+    display: flex;
+    flex-direction: column;
+    padding-inline: clamp(10px,6vw,410px);
+  }
+
+
+
+  .main-text ul {
+    gap: clamp(1rem, 5vw, 3rem);
+    justify-content: center;
+    align-items: baseline;
+    position: relative;
+    top: 1.4rem;
+
+  }
+
+  .main-text h1 {
+    font-size: 5rem;
+    text-align: start;
+    max-width: 11ch;
+  }
+
+  .main-text p {
+    text-align: start;
+    max-width: 42ch;
+    margin-inline-start: 0;
+  }
+
+  .main-text>* {
+    margin: 1.7rem 0;
+  }
+
+  .main-text .button {
+    margin-inline-start: 0;
+  }
+}
+
+/* ---------------------- Utility Classes ---------------------------------------- */
+.visually-hidden {
+  position: absolute;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
+.container-body {
+  --max-width: 1440px;
+
+  width: min(--max-width, 100%);
+  margin-inline: auto;
+}
+
+.split {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-auto-flow: row;
+  width: 100%;
+  grid-template-areas:
+    "hero-img"
+    "hero-text";
+}
+
+@media (min-width:47em) {
+  .split {
+    grid-auto-flow: column;
+    grid-auto-columns: 1.4fr 1fr;
+    grid-template-areas: "hero-text hero-img";
+    width: 88vw;
+    padding-block: 4rem;
+    margin-inline: auto;
+  }
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+
+  50% {
+    transform: scaleY(1.1);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
